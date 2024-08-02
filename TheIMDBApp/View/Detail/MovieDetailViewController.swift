@@ -10,6 +10,18 @@ import UIKit
 
 class MovieDetailViewController: UIViewController {
     
+    enum MovieDetailViewControllerConstraints {
+        enum BackButton {
+            static let top: CGFloat = 10
+            static let leading: CGFloat = 10
+            static let width: CGFloat = 60
+            static let height: CGFloat = 30
+        }
+        enum MovieDetailUIView {
+            static let top: CGFloat = 10
+        }
+    }
+    
     weak var movieCoordinator: MovieCoordinator?
     private let factory: MovieFactory
     private var movie: Movie
@@ -66,12 +78,12 @@ class MovieDetailViewController: UIViewController {
     
     func setAutolayout() {
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            backButton.widthAnchor.constraint(equalToConstant: 60),
-            backButton.heightAnchor.constraint(equalToConstant: 30),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: MovieDetailViewControllerConstraints.BackButton.top),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: MovieDetailViewControllerConstraints.BackButton.leading),
+            backButton.widthAnchor.constraint(equalToConstant: MovieDetailViewControllerConstraints.BackButton.width),
+            backButton.heightAnchor.constraint(equalToConstant: MovieDetailViewControllerConstraints.BackButton.height),
             
-            movieDetailUIView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 10),
+            movieDetailUIView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: MovieDetailViewControllerConstraints.MovieDetailUIView.top),
             movieDetailUIView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             movieDetailUIView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             movieDetailUIView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -87,6 +99,6 @@ class MovieDetailViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
+        movieCoordinator?.back()
     }
 }

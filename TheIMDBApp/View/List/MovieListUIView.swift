@@ -15,14 +15,21 @@ protocol MovieListUIViewDelegate: AnyObject {
 
 class MovieListUIView: UIView {
     
+    enum MovieListUIViewConstraints {
+        enum ImgMovie {
+            static let top: CGFloat = 10
+            static let height: CGFloat = 80
+        }
+        enum TableViewMovies {
+            static let top: CGFloat = 15
+            static let rowHeight: CGFloat = 300
+        }
+    }
+    
     var movies: [Movie] = []
     var selectedIndexPath: IndexPath?
     weak var delegate: MovieListUIViewDelegate?
     var viewModel: MovieViewModel?
-    
-    enum MovieListUIViewConstraints {
-        
-    }
     
     private lazy var mainContainer: UIView = {
         let view = UIView(frame: .zero)
@@ -81,11 +88,11 @@ class MovieListUIView: UIView {
             mainContainer.trailingAnchor.constraint(equalTo: trailingAnchor),
             mainContainer.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            imgMovie.topAnchor.constraint(equalTo: mainContainer.topAnchor, constant: 10),
+            imgMovie.topAnchor.constraint(equalTo: mainContainer.topAnchor, constant: MovieListUIViewConstraints.ImgMovie.top),
             imgMovie.centerXAnchor.constraint(equalTo: mainContainer.centerXAnchor),
-            imgMovie.heightAnchor.constraint(equalToConstant: 80),
+            imgMovie.heightAnchor.constraint(equalToConstant: MovieListUIViewConstraints.ImgMovie.height),
             
-            tableViewMovies.topAnchor.constraint(equalTo: imgMovie.bottomAnchor, constant: 15),
+            tableViewMovies.topAnchor.constraint(equalTo: imgMovie.bottomAnchor, constant: MovieListUIViewConstraints.TableViewMovies.top),
             tableViewMovies.leadingAnchor.constraint(equalTo: mainContainer.leadingAnchor),
             tableViewMovies.trailingAnchor.constraint(equalTo: mainContainer.trailingAnchor),
             tableViewMovies.bottomAnchor.constraint(equalTo: mainContainer.bottomAnchor),
@@ -127,6 +134,6 @@ extension MovieListUIView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return MovieListUIViewConstraints.TableViewMovies.rowHeight
     }
 }

@@ -22,7 +22,11 @@ class MovieCoordinator {
     }
     
     func openMovieDetail(movie: Movie, viewModel: MovieViewModel) {
-        let pokedexDetailViewController = factory.makeMovieDeatailViewController(movieCoordinator: self, movie: movie, viewModel: viewModel)
-        navigationController.pushViewController(pokedexDetailViewController, animated: true)
+        let movieDetailViewController = factory.makeMovieDeatailViewController(movieCoordinator: self, movie: movie, viewModel: viewModel)
+        navigationController.pushViewController(movieDetailViewController, animated: true)
+    }
+    
+    func back() {
+        navigationController.popViewController(animated: true)
     }
 }

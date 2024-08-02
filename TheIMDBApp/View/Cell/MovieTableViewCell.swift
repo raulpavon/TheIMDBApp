@@ -10,7 +10,18 @@ import UIKit
 
 class MovieTableViewCell: UITableViewCell {
     enum MovieCollectionViewCellConstraints {
-        
+        enum InfoContainer {
+            static let height: CGFloat = 50
+        }
+        enum Label {
+            static let fontSize: CGFloat = 12
+        }
+        enum LbMovieName {
+            static let bottom: CGFloat = -5
+        }
+        enum LbMovieDate {
+            static let bottom: CGFloat = -10
+        }
     }
     
     static var identifier: String {
@@ -36,7 +47,7 @@ class MovieTableViewCell: UITableViewCell {
     private lazy var lbMovieName: UILabel = {
         let label = UILabel(frame: CGRect.zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: GlobalConstants.Font.robotoRegular, size: 12)
+        label.font = UIFont(name: GlobalConstants.Font.robotoRegular, size: MovieCollectionViewCellConstraints.Label.fontSize)
         label.textColor = .black
         label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping
@@ -47,7 +58,7 @@ class MovieTableViewCell: UITableViewCell {
     private lazy var lbMovieDate: UILabel = {
         let label = UILabel(frame: CGRect.zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: GlobalConstants.Font.robotoLight, size: 12)
+        label.font = UIFont(name: GlobalConstants.Font.robotoLight, size: MovieCollectionViewCellConstraints.Label.fontSize)
         label.textColor = .black
         label.textAlignment = .center
         label.lineBreakMode = .byWordWrapping
@@ -102,15 +113,15 @@ class MovieTableViewCell: UITableViewCell {
             
             
             infoContainer.bottomAnchor.constraint(equalTo: imgMovie.bottomAnchor),
-            infoContainer.heightAnchor.constraint(equalToConstant: 50),
+            infoContainer.heightAnchor.constraint(equalToConstant: MovieCollectionViewCellConstraints.InfoContainer.height),
             infoContainer.leadingAnchor.constraint(equalTo: imgMovie.leadingAnchor),
             infoContainer.trailingAnchor.constraint(equalTo: imgMovie.trailingAnchor),
             
             lbMovieName.centerXAnchor.constraint(equalTo: infoContainer.centerXAnchor),
-            lbMovieName.bottomAnchor.constraint(equalTo: lbMovieDate.topAnchor, constant: -5),
+            lbMovieName.bottomAnchor.constraint(equalTo: lbMovieDate.topAnchor, constant: MovieCollectionViewCellConstraints.LbMovieName.bottom),
             
             lbMovieDate.centerXAnchor.constraint(equalTo: infoContainer.centerXAnchor),
-            lbMovieDate.bottomAnchor.constraint(equalTo: infoContainer.bottomAnchor, constant: -10),
+            lbMovieDate.bottomAnchor.constraint(equalTo: infoContainer.bottomAnchor, constant: MovieCollectionViewCellConstraints.LbMovieDate.bottom),
         ])
     }
     
